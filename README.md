@@ -1,58 +1,51 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Task Management API - Gestão de Projetos e Tarefas
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" />
+  <img src="https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-15-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
 </p>
 
-## About Laravel
+## 📌 Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Esta é uma API RESTful desenvolvida com base na metodologia **PBL (Aprendizagem Baseada em Problemas)**. O objetivo é solucionar um cenário real de agências de desenvolvimento: criar um sistema seguro e eficiente onde gerentes (Admins) podem gerenciar projetos e delegar tarefas, enquanto desenvolvedores (Devs) podem visualizar e atualizar o status de suas próprias atribuições.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O projeto foi construído com foco em **boas práticas de Engenharia de Software, Segurança e Infraestrutura (DevOps)**, operando em um ambiente 100% conteinerizado pronto para produção.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Arquitetura e Stack Tecnológica
 
-## Learning Laravel
+* **Backend:** PHP 8.4 com Laravel 11 (focado 100% em API, sem views).
+* **Banco de Dados:** PostgreSQL 15.
+* **Infraestrutura/DevOps:** Docker e Docker Compose. Arquitetura separando o servidor web (Nginx) da aplicação (PHP-FPM).
+* **Segurança e Autenticação:** Laravel Sanctum (Tokens JWT/Bearer) e controle de acesso baseado em funções (RBAC).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Funcionalidades (Até o momento)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [x] **Ambiente Dockerizado:** Configuração customizada do `Dockerfile` e `docker-compose.yml` para Nginx, PHP e PostgreSQL.
+- [x] **Modelagem de Banco de Dados:** Entidades `Users`, `Projects` e `Tasks` com chaves estrangeiras e exclusão em cascata (MER/DER estruturado).
+- [x] **Seeders e Factories:** População automatizada do banco com dados fictícios e usuários de teste para validação de regras de negócio.
+- [x] **Autenticação Segura:** Geração e revogação de tokens de acesso via rota `/api/login`.
+- [x] **Proteção de Rotas:** Middleware bloqueando o acesso de usuários não autenticados.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🚀 Como executar o projeto localmente
 
-## Agentic Development
+Como o projeto é totalmente conteinerizado, você não precisa ter o PHP ou o PostgreSQL instalados na sua máquina. Basta ter o [Docker](https://www.docker.com/) instalado.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+**1. Clone o repositório**
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone [https://github.com/21v1u5/task-api-php.git](https://github.com/21v1u5/task-api-php.git)
+cd task-api-php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+2. Suba a infraestrutura
+```bash
+docker compose up -d --build
+```
 
-## Contributing
+3. Configure o banco de dados e os dados de teste
+```bash
+docker compose exec app php artisan migrate:fresh --seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+O servidor estará rodando em: http://localhost:8000
